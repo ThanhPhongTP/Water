@@ -3,12 +3,16 @@ package com.example.water;
 import androidx.annotation.Dimension;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +44,7 @@ public class Water_tracker extends AppCompatActivity {
         if (bundle != null) {
             value = bundle.getInt("cup", 0);
         }
-        Toast.makeText(this, value + "", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, value + "", Toast.LENGTH_SHORT).show();
         tvCup.setText(value + "");
         //set percent
         switch (value){
@@ -77,10 +81,11 @@ public class Water_tracker extends AppCompatActivity {
         Thread bamgio = new Thread() {
             public void run() {
                 try {
-                    sleep(5000);
+                    sleep(3000);
                 } catch (Exception e) {
                 } finally {
                     Intent intent1 = new Intent(getApplication(), WellDone.class);
+
                     startActivity(intent1);
                 }
             }
@@ -94,26 +99,31 @@ public class Water_tracker extends AppCompatActivity {
     }
 
     private void setWaveview(){
+        Display display = getWindowManager().getDefaultDisplay();
+        int height = display.getHeight();// lay kt man hinh
+        //set animation
+        Animation animation = new TranslateAnimation(0,0,height / 8 - 1,0);
+        animation.setDuration(2000);
+        animation.setFillAfter(true);
+        waveview.startAnimation(animation);
+//        waveview.setVisibility(0);
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         int value = 0;
         if (bundle != null) {
             value = bundle.getInt("cup", 0);
         }
-
         waveview.setVelocity(1);
         waveview.setProgress(1);
         waveview.setGradientAngle(45);
         waveview.setWaveHeight(20);
-//        waveview.setStartColor(Color.GREEN);
-//        waveview.setCloseColor(Color.YELLOW);
-        Display display = getWindowManager().getDefaultDisplay();
-        int height = display.getHeight();// lay kt man hinh
+        waveview.setStartColor(Color.CYAN);
+        waveview.setCloseColor(Color.YELLOW);
+
         ViewGroup.LayoutParams multiWaveHeader = waveview.getLayoutParams();
         multiWaveHeader.height = height / 8 * value;
         waveview.setLayoutParams(multiWaveHeader);
-
-
     }
 
 

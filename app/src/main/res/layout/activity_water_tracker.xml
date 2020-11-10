@@ -34,7 +34,8 @@
             android:id="@+id/tvpercent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="25%"
+            android:text="@string/app_name"
+            android:textStyle="bold"
             android:textSize="30sp" />
 
         <LinearLayout
@@ -52,7 +53,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="/8 cups"
+                android:text="@string/cup"
                 android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>

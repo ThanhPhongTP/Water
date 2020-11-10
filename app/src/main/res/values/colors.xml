@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="backgr">#DCEAF8</color>
-    <color name="holo_purple">#ffaa66cc</color>
+    <color name="wave1">#45FF3F</color>
+    <color name="wave2">#B8CAFF</color>
 </resources>

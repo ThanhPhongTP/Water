@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnDrink, btnclear;
+    Button btnDrink;
     ProgressBar progressBar;
     TextView tvCup;
     int ndem = 0;
@@ -47,28 +47,19 @@ public class MainActivity extends AppCompatActivity {
         setEvent();
         updateProgress();
         createNotification();
-        btnclear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sharedPreferences.edit().remove("cups").commit();
-                ndem = 0;
-            }
-        });
-
-
     }
 
     private void timeSetCallNotification() {
         calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
         String time = simpleDateFormat.format(calendar.getTime());
-        if (time == "0:0"){
+        if (time == "0:0" || time == "00:00"){
             ndem = 0;
         }
         Intent intent = new Intent(this, NotificationReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         long timeCurrent = System.currentTimeMillis();
-        long setTime = 10000;
+        long setTime = 1000 * 60 * 90;
         alarmManager.set(AlarmManager.RTC_WAKEUP, timeCurrent + setTime, pendingIntent);
     }
 
@@ -137,13 +128,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private void setControl() {
         sharedPreferences = getSharedPreferences("cups", Context.MODE_PRIVATE);
         btnDrink = findViewById(R.id.btnDrink);
         tvCup = findViewById(R.id.txtcup);
         progressBar = findViewById(R.id.progress_bar);
-        btnclear = findViewById(R.id.clear);
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 //        timePicker = findViewById(R.id.timepicker);
     }

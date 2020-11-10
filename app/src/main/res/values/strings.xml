@@ -2,5 +2,12 @@
     <string name="app_name">Water</string>
     <string name="channel_name">Thông báo</string>
     <string name="channel_description">Nhắc uống nước</string>
+    <string name="desc">Water help to remove waste from your body</string>
+    <string name="well">Well done!</string>
+    <string name="done">DONE</string>
+    <string name="cup">/8 cups</string>
+    <string name="waterTracker">Water tracker</string>
+    <string name="drink">Drink</string>
+
 
 </resources>
