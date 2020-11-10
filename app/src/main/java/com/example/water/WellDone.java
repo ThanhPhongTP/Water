@@ -34,11 +34,11 @@ public class WellDone extends AppCompatActivity {
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Integer.parseInt(s) == 8) {
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString(scup, 0 + "");
-                    editor.commit();
-                }
+//                if (Integer.parseInt(s) == 8) {
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.putString(scup, 0 + "");
+//                    editor.commit();
+//                }
                 Intent intent = new Intent(getApplication(), MainActivity.class);
                 startActivity(intent);
                 finish();
