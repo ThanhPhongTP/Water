@@ -85,10 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
                     if (ndem <= 7)
                         timeSetCallNotification();
-//                    if (ndem == 8) {
-//                        Toast.makeText(getApplication(), "Bạn đã uống đủ số nước", Toast.LENGTH_SHORT).show();
-//                        btnDrink.setVisibility(View.GONE);
-//                    }
                 } else if (ndem >= 8) {
 //                    Toast.makeText(getApplication(), "Bạn đã uống đủ số nước", Toast.LENGTH_SHORT).show();
                     return;

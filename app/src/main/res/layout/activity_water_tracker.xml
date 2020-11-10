@@ -13,9 +13,7 @@
         android:gravity="bottom">
         <com.scwang.wave.MultiWaveHeader
             android:id="@+id/wave"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleY="-1" />
+            style="@style/waveview" />
     </LinearLayout>
 
     <LinearLayout
@@ -26,17 +24,13 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/icon_nav_3" />
+            android:src="@drawable/icon_nav_3"
+            style="@style/imagev" />
 
         <TextView
             android:id="@+id/tvpercent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/app_name"
-            android:textStyle="bold"
-            android:textSize="30sp" />
+            style="@style/percent" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -45,16 +39,12 @@
 
             <TextView
                 android:id="@+id/tvcup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="2"
-                android:textSize="16sp" />
+                style="@style/txtcup" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/cup"
-                android:textSize="16sp" />
+                style="@style/txtcup" />
         </LinearLayout>
     </LinearLayout>
 

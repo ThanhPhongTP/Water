@@ -28,7 +28,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "id_cup")
                 .setSmallIcon(R.drawable.icon_nav_3)
                 .setContentTitle("Water tracker")
-                .setContentText("Bạn đã uống " + Integer.parseInt(s) + " cốc nước. Bạn cần uống thêm " + (8 - Integer.parseInt(s)) + " cốc nước nữa.")
+                .setContentText(R.string.notificaion1 + Integer.parseInt(s) +" " + R.string.notificaion2 + " " + (8 - Integer.parseInt(s)) + " " + R.string.notificaion3)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);

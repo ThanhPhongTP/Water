@@ -12,15 +12,11 @@
         android:orientation="vertical"
         android:gravity="center">
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/like"/>
+            android:src="@drawable/like"
+            style="@style/img_like" />
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="22sp"
-            android:text="@string/well"/>
+            android:text="@string/well"
+            style="@style/txt_welldone" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,9 +29,7 @@
         android:gravity="center">
         <Button
             android:id="@+id/btnDone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_done"
-            android:text="@string/done"/>
+            android:text="@string/done"
+            style="@style/btn_done" />
     </LinearLayout>
 </LinearLayout>
