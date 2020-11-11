@@ -45,11 +45,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setControl();
         setEvent();
-//        updateProgress();
         createNotification();
-//        saveDay();
-//        checkbtn();
-//        updateData();
+        updateData();
     }
 
     private void timeSetCallNotification() {
@@ -71,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 //                Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
                 editor.remove(scup);
                 tvCup.setText("0");
+                progressBar.setProgress(0);
             }
         }
         editor.putString(saveDate, date);
@@ -112,23 +110,11 @@ public class MainActivity extends AppCompatActivity {
                 bundle.putInt("cup", ndem);
                 intent.putExtras(bundle);
                 startActivity(intent);
-
                 finish();
             }
         });
     }
 
-    //
-    private void updateProgress() {
-        progressBar.setMax(8);
-//        s = sharedPreferences.getString(scup, "");
-
-            progressBar.setProgress(ndem);
-        if (tvCup.getText() == "0")
-            progressBar.setProgress(0);
-    }
-
-    //
     private void createNotification() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_name);
