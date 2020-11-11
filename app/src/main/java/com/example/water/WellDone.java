@@ -26,7 +26,7 @@ public class WellDone extends AppCompatActivity {
 
     protected void onPause(){
         super.onPause();
-        finish();
+//        finish();
     }
 
     private void setEvent() {

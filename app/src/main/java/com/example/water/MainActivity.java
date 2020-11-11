@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     String scup = "cups";
     String s = "";
     Calendar calendar;
-    TimePicker timePicker;
+    String saveDate = "saveDate";
     AlarmManager alarmManager;
     PendingIntent pendingIntent;
 
@@ -44,9 +45,11 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setControl();
         setEvent();
-        updateProgress();
+//        updateProgress();
         createNotification();
-        saveDay();
+//        saveDay();
+//        checkbtn();
+//        updateData();
     }
 
     private void timeSetCallNotification() {
@@ -57,59 +60,51 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.set(AlarmManager.RTC_WAKEUP, timeCurrent + setTime, pendingIntent);
     }
 
-    //Lay ngay he thong luu va so sanh
-    private void saveDay() {
-        Intent intent = new Intent(this, UpdateDataReceiver.class);
+    private void updateData(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-//        String date = simpleDateFormat.format(calendar.getTime());
-        int minute = calendar.getTime().getMinutes();
-        int hour = calendar.getTime().getHours();
-        int second = calendar.getTime().getSeconds();
-        String time = simpleDateFormat.format(calendar.getTime());
-        calendar.set(Calendar.HOUR_OF_DAY,23);
-        calendar.set(Calendar.MINUTE, 59);
-        calendar.set(Calendar.SECOND, 59);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-
-        if(hour == 23 && minute == 59 && second == 59){
-            btnDrink.setEnabled(true);
-            Toast.makeText(this, time + "", Toast.LENGTH_SHORT).show();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String date = simpleDateFormat.format(calendar.getTime());
+        String sDate = sharedPreferences.getString(saveDate, date);
+        if (sharedPreferences.contains(saveDate)) {
+            if(!date.equals(sDate)){
+//                Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+                editor.remove(scup);
+                tvCup.setText("0");
+            }
         }
+        editor.putString(saveDate, date);
+        editor.commit();
     }
 
-
-
-
     private void setEvent() {
-        s = sharedPreferences.getString(scup, "");
+        progressBar.setMax(8);
+        s = sharedPreferences.getString(scup, 0 + "");
         tvCup.setText(s);
+        progressBar.setProgress(Integer.parseInt(s));
+
         if (!sharedPreferences.contains("cups")) {
             tvCup.setText("0");
         }
-        if(Integer.parseInt(s) == 8)
-            btnDrink.setEnabled(false);
         btnDrink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ndem < 8) {
-                    s = sharedPreferences.getString(scup, "");
-                    if (sharedPreferences.contains("cups") && Integer.parseInt(s) < 8) {
-                        ndem = Integer.parseInt(s) + 1;
-                    } else
-                        ndem += 1;
+                s = sharedPreferences.getString(scup, 0 + "");
+                if (Integer.parseInt(s) < 8) {
+                    ndem = Integer.parseInt(s) + 1;
                     tvCup.setText(ndem + "");
+                    progressBar.setProgress(ndem);
+
+                    Log.d("BBBBB",ndem+"");
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString(scup, ndem + "");
                     editor.commit();
-
-                    if (ndem <= 7)
-                        timeSetCallNotification();
-                } else if (ndem >= 8) {
-//                    Toast.makeText(getApplication(), "Bạn đã uống đủ số nước", Toast.LENGTH_SHORT).show();
-
-
+                    // notification
+                    timeSetCallNotification();
+//                    updateProgress();
+                }
+                else {
+                    Toast.makeText(getApplication(), R.string.notificaion, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Intent intent = new Intent(getApplication(), Water_tracker.class);
@@ -117,8 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 bundle.putInt("cup", ndem);
                 intent.putExtras(bundle);
                 startActivity(intent);
-                updateProgress();
-                MainActivity.super.onPause();
+
                 finish();
             }
         });
@@ -127,14 +121,11 @@ public class MainActivity extends AppCompatActivity {
     //
     private void updateProgress() {
         progressBar.setMax(8);
-        s = sharedPreferences.getString(scup, "");
-        if (!sharedPreferences.contains("cups"))
+//        s = sharedPreferences.getString(scup, "");
+
             progressBar.setProgress(ndem);
-        else
-            progressBar.setProgress(Integer.parseInt((s)));
-        if (tvCup.getText() == "0"){
+        if (tvCup.getText() == "0")
             progressBar.setProgress(0);
-        }
     }
 
     //

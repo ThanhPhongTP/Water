@@ -8,7 +8,6 @@
     <string name="cup">/8 cups</string>
     <string name="waterTracker">Water tracker</string>
     <string name="drink">Drink</string>
-    <string name="notificaion1">Bạn đã uống</string>
-    <string name="notificaion2">cốc nước. Bạn cần uống thêm </string>
-    <string name="notificaion3">cốc nước nữa.</string>
+
+    <string name="notificaion">Bạn đã uống đủ số nước trong ngày</string>
 </resources>
