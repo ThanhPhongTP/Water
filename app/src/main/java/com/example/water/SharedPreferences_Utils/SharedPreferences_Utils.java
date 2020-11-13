@@ -25,7 +25,6 @@ public class SharedPreferences_Utils {
         editor.putString(scup, saveWater);
         editor.commit();
     }
-
     public String getWaterCounter(){
         String counter = sharedPreferences.getString(scup, 0 + "");
         return counter;
