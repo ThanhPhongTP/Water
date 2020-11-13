@@ -44,6 +44,5 @@ public class SharedPreferences_Utils {
         }
         editor.putString(saveDate, date);
         editor.commit();
-
     }
 }
