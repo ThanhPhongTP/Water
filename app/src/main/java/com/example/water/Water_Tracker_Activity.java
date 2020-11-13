@@ -1,25 +1,20 @@
 package com.example.water;
 
-import androidx.annotation.Dimension;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Display;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.scwang.wave.MultiWaveHeader;
 
-public class Water_tracker extends AppCompatActivity {
+public class Water_Tracker_Activity extends AppCompatActivity {
 
     TextView tvCup, tvPervcent;
     MultiWaveHeader waveview;
@@ -37,43 +32,41 @@ public class Water_tracker extends AppCompatActivity {
 
     @SuppressLint("ResourceAsColor")
     private void setEvent() {
-        //get du lieu
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
         int value = 0;
-        if (bundle != null) {
-            value = bundle.getInt("cup", 0);
+        Intent intent = getIntent();
+        if (intent != null) {
+            value = intent.getIntExtra("cup", 0);
         }
-//        Toast.makeText(this, value + "", Toast.LENGTH_SHORT).show();
         tvCup.setText(value + "");
         //set percent
+        String input ="";
         switch (value){
             case 1:
-                tvPervcent.setText("12.5%");
+                input = "12.5%";
                 break;
             case 2:
-                tvPervcent.setText("25%");
+                input = "25%";
                 break;
             case 3:
-                tvPervcent.setText("37.5%");
+                input = "37.5%";
                 break;
             case 4:
-                tvPervcent.setText("50%");
+                input = "50%";
                 break;
             case 5:
-                tvPervcent.setText("62.5%");
+                input = "62.5%";
                 break;
             case 6:
-                tvPervcent.setText("75%");
+                input = "75%";
                 break;
             case 7:
-                tvPervcent.setText("87.5%");
+                input = "87.5%";
                 break;
             default:
-                tvPervcent.setText("100%");
+                input = "100%";
 
         }
-
+        tvPervcent.setText(input);
     }
 
     //Chuyen man hinh sau 3s
@@ -84,7 +77,7 @@ public class Water_tracker extends AppCompatActivity {
                     sleep(3000);
                 } catch (Exception e) {
                 } finally {
-                    Intent intent1 = new Intent(getApplication(), WellDone.class);
+                    Intent intent1 = new Intent(getApplication(), WellDone_Activity.class);
 
                     startActivity(intent1);
                 }
@@ -97,7 +90,6 @@ public class Water_tracker extends AppCompatActivity {
         super.onPause();
         finish();
     }
-
     private void setWaveview(){
         Display display = getWindowManager().getDefaultDisplay();
         int height = display.getHeight();// lay kt man hinh
@@ -107,7 +99,6 @@ public class Water_tracker extends AppCompatActivity {
         animation.setFillAfter(true);
         waveview.startAnimation(animation);
 //        waveview.setVisibility(0);
-
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         int value = 0;
@@ -120,13 +111,10 @@ public class Water_tracker extends AppCompatActivity {
         waveview.setWaveHeight(20);
         waveview.setStartColor(Color.CYAN);
         waveview.setCloseColor(Color.YELLOW);
-
         ViewGroup.LayoutParams multiWaveHeader = waveview.getLayoutParams();
         multiWaveHeader.height = height / 8 * value;
         waveview.setLayoutParams(multiWaveHeader);
     }
-
-
     private void setControl() {
         waveview = findViewById(R.id.wave);
         tvPervcent = findViewById(R.id.tvpercent);
