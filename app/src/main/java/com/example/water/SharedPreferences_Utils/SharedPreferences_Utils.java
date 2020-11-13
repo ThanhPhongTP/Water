@@ -30,7 +30,6 @@ public class SharedPreferences_Utils {
         String counter = sharedPreferences.getString(scup, 0 + "");
         return counter;
     }
-
     public void updateDataPassOneDay(TextView textView, ProgressBar progressBar) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Calendar calendar = Calendar.getInstance();
