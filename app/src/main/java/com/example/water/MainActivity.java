@@ -44,7 +44,13 @@ public class MainActivity extends AppCompatActivity {
         setControl();
         setEventWater();
         createNotificationWater();
-        sharedPreferences_utils.updateDataPassOneDay(tvCup,progressBar);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateDataPassOneDay();
     }
 
     private void timeSetCallNotification() {
@@ -59,23 +65,23 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//    private void updateDataPassOneDay(TextView textView, ProgressBar progressBar) {
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        Calendar calendar = Calendar.getInstance();
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-//        String date = simpleDateFormat.format(calendar.getTime());
-//        String sDate = sharedPreferences.getString(saveDate, date);
-//        if (sharedPreferences.contains(saveDate)) {
-//            if(!date.equals(sDate)){
-//                editor.remove(scup);
-//                textView.setText("0");
-//                progressBar.setProgress(0);
-//            }
-//        }
-//        editor.putString(saveDate, date);
-//        editor.commit();
-//
-//    }
+    private void updateDataPassOneDay() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String date = simpleDateFormat.format(calendar.getTime());
+        String sDate = sharedPreferences.getString(saveDate, date);
+        if (sharedPreferences.contains(saveDate)) {
+            if(!date.equals(sDate)){
+                editor.remove(scup);
+                tvCup.setText("0");
+                progressBar.setProgress(0);
+            }
+        }
+        editor.putString(saveDate, date);
+        editor.commit();
+
+    }
 
     private void setEventWater() {
         progressBar.setMax(8);
@@ -130,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setControl() {
         sharedPreferences_utils = new SharedPreferences_Utils(this);
-//        sharedPreferences = getSharedPreferences(scup, Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(scup, Context.MODE_PRIVATE);
 
         btnDrink = findViewById(R.id.btnDrink);
         tvCup = findViewById(R.id.txtcup);
