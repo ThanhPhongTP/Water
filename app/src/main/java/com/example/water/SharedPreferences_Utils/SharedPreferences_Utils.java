@@ -29,6 +29,11 @@ public class SharedPreferences_Utils {
         String counter = sharedPreferences.getString(scup, 0 + "");
         return counter;
     }
+    public void removeWaterCounter(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(scup);
+        editor.commit();
+    }
     public void updateDataPassOneDay(TextView textView, ProgressBar progressBar) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Calendar calendar = Calendar.getInstance();
