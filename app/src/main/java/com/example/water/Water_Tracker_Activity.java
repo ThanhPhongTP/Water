@@ -4,13 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.scwang.wave.MultiWaveHeader;
 
@@ -120,5 +124,44 @@ public class Water_Tracker_Activity extends AppCompatActivity {
         tvPervcent = findViewById(R.id.tvpercent);
         tvCup = findViewById(R.id.tvcup);
     }
+//    private void setEvent() {
+//        progressBar.setMax(8);
+//        s = sharedPreferences.getString(scup, 0 + "");
+//        tvCup.setText(s);
+//        progressBar.setProgress(Integer.parseInt(s));
+//
+//        if (!sharedPreferences.contains("cups")) {
+//            tvCup.setText("0");
+//        }
+//        btnDrink.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                s = sharedPreferences.getString(scup, 0 + "");
+//                if (Integer.parseInt(s) < 8) {
+//                    ndem = Integer.parseInt(s) + 1;
+//                    tvCup.setText(ndem + "");
+//                    progressBar.setProgress(ndem);
+//
+//                    Log.d("BBBBB",ndem+"");
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.putString(scup, ndem + "");
+//                    editor.commit();
+//                    // notification
+//                    timeSetCallNotification();
+////                    updateProgress();
+//                }
+//                else {
+//                    Toast.makeText(getApplication(), R.string.notificaion, Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                Intent intent = new Intent(getApplication(), Water_tracker.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("cup", ndem);
+//                intent.putExtras(bundle);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+//    }
 
 }

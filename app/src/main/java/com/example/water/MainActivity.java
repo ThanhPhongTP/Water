@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -92,12 +93,12 @@ public class MainActivity extends AppCompatActivity {
         btnDrink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                s = sharedPreferences_utils.getWaterCounter();
                 if (Integer.parseInt(s) < 8) {
                     ndem = Integer.parseInt(s) + 1;
                     tvCup.setText(String.valueOf(ndem));
                     progressBar.setProgress(ndem);
-                   sharedPreferences_utils.setWaterCounter(String.valueOf(ndem));
-
+                    sharedPreferences_utils.setWaterCounter(String.valueOf(ndem));
                     Intent intent = new Intent(getApplication(), Water_Tracker_Activity.class);
                     intent.putExtra("cup",ndem);
                     startActivity(intent);
@@ -113,15 +114,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-//    private void saveCounter (String name){
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString(scup, name);
-//        editor.commit();
-//    }
-//    private String getCounter(){
-//        String counter = sharedPreferences.getString(scup, 0 + "");
-//        return counter;
-//    }
+
     private void createNotificationWater() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_name);
